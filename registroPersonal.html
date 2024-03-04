@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="reset.css">
+	<link rel="stylesheet" href="personal.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<title> Mesa Personal</title>
+</head>
+
+
+
+
+<header>
+
+	<nav class="navbar navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Mesa Personal</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="index.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="registroCond.html">Registro Conductor</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="registroGuarda.html">Registro GuardaTren</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="corridaTrabajos.html">Corridas</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="listas.html">Listas</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="registroPersonal.html">Base de datos</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+</header>
+<main>
+
+	<body>
+		<h1>Listas de Personal</h1>
+
+		<section class="container">
+			<label for="rol">Base</label>
+			<select name="rol" id="rol" class="rol">
+				<option value="suarez" selected>Suarez</option>
+				<option value="victoria">Victoria</option>
+				<option value="instructorld">Retiro</option>
+			</select>
+
+
+
+			<h1 class="title-h1">Personal de </h1><select name="rol" id="rol" class="rol">
+				<option value="electrico" selected>Cond. Diesel</option>
+				<option value="diesel">Cond. Electrico</option>
+				<option value="guardaelec">Guarda Electrico</option>
+				<option value="guardadiesel">Guarda Diesel</option>
+				<option value="ordenes">Ordenes</option>
+				<option value="pool">Pool.</option>
+				<option value="maniobras">Maniobras</option>
+			</select>
+			<label for="nacimiento">Buscar Legajo</label>
+			<input type="search" id="search" name="search" class="input-number">
+			<form action="/conductores/search/<%= conductores.legajo %>" method="POST">
+				<input type="hidden" name="_method" value="SEARCH">
+				<button type="submit" class="btn btn-success">Buscar</button>
+			</form>
+
+			<h1>CRUD DE BASE DE DATOS DEL PERSONAL</h1>
+		</section>
+		<div>
+			<tbody id="tabla">
+				<table class="table table-dark table-striped">
+
+					<thead>
+						<tr>
+							<th style="display: none">ID</th>
+							<th>Nombre</th>
+							<th>Email</th>
+							<th>Puesto</th>
+							<th>Legajo</th>
+							<th>N° Servicio</th>
+							<th>Teléfono</th>
+							<th>Tarea</th>
+							<th>DNI</th>
+							<th>Fecha Nac.</th>
+							<th>Fecha Ing</th>
+							<th>Venc.Cupón</th>
+							<th>Base Pert.</th>
+							<th>Calle</th>
+							<th>Localidad</th>
+							<th>Provincia</th>
+							<th>Código Postal</th>
+							<th>Conocimiento de Vías</th>
+
+						</tr>
+					<tbody>
+
+
+						<tr>
+							<td style="display: none">
+								<%= conductores.id %>
+							</td>
+							<td>
+								<%= conductores.nombre %>
+							</td>
+							<td>
+								<%= conductores.email %>
+							</td>
+							<td>
+								<%= conductores.puesto %>
+							</td>
+							<td>
+								<%= conductores.legajo %>
+							</td>
+							<td>
+								<%= conductores.servicio %>
+							</td>
+							<td>
+								<%= conductores.telefono %>
+							</td>
+							<td>
+								<%= conductores.tarea %>
+							</td>
+							<td>
+								<%= conductores.dni %>
+							</td>
+							<td>
+								<%= conductores.fecha_nacimiento %>
+							</td>
+							<td>
+								<%= conductores.fecha_ingreso %>
+							</td>
+							<td>
+								<%= conductores.fecha_vencimiento_cupon %>
+							</td>
+							<td>
+								<%= conductores.base_pertenencia %>
+							</td>
+							<td>
+								<%= conductores.calle %>
+							</td>
+							<td>
+								<%= conductores.localidad %>
+							</td>
+							<td>
+								<%= conductores.provincia %>
+							</td>
+							<td>
+								<%= conductores.codigo_postal %>
+							</td>
+							<td>
+								<%= conductores.conocimiento_de_vias %>
+							</td>
+
+							<td>
+								<form action="/conductores/editar/<%= conductores.id %>" method="POST">
+									<input type="hidden" name="_method" value="PUT">
+									<!-- Otros campos del formulario si es necesario -->
+									<button type="submit" class="btn btn-primary">Editar</button>
+								</form>
+
+
+								<form action="/conductores/borrar/<%= conductores.id %>" method="POST"
+									onsubmit="return confirm('¿Estás seguro de borrar este usuario?')">
+									<input type="hidden" name="_method" value="DELETE">
+									<button type="submit" class="btn btn-danger">Borrar</button>
+								</form>
+
+
+							</td>
+						</tr>
+
+						<tr>
+
+
+							<td colspan="8">No hay datos de usuarios disponibles.</td>
+						</tr>
+
+					</tbody>
+
+				</table>
+		</div>
+
+
+
+	</body>
+</main>
+
+<footer>
+
+
+	<img class="rodapie" src="imagenes/logo-grisSin-fondo.png" width="125px" height="125px">
+	<p class="eslogan">Navegá más allá de lo esperado</p>
+	<p class="brand-copy"> copyright 2023 - FHD</p>
+	<p>Developed by FHD</p>
+
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+	</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+	</script>
+<script src="personal.js"></script>
+
+</html>

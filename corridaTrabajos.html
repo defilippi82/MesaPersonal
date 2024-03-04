@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mesa Personal by FHD</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="personal.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://unpkg.com/html2pdf.js"></script>
+    <title> Mesa Personal by FHD</title>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Mesa Personal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="registroCond.html">Registro Conductor</a></li>
+                        <li class="nav-item"><a class="nav-link" href="registroGuarda.html">Registro GuardaTren</a></li>
+                        <li class="nav-item"><a class="nav-link" href="corridaTrabajos.html">Corridas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="listas.html">Listas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="registroPersonal.html">Base de datos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <h1>Personal para Corrida</h1>
+
+        <div>
+            <div class="container">
+
+                <form id="formulario" class="row g-3" action="/register" method="POST">
+                    <div class="d-flex justify-content-start">
+
+                        <p><label>Responsable</label><input type="text" id="responsable" name="responsable"placeholder="Nombre y Apellido" pattern=[A-Z\sa-z]{3,20} required></p>
+                        <p><label for="trabajo">Nº de Trabajo</label><input type="number" id="trabajo" name="trabajo" maxlength="6" class="input-number" required></p>
+                    </div>
+                    <div lass="d-flex justify-content-start">
+                        <br>
+                        <h3>Sector que ocupa</h3>
+                        <p>
+                        <fieldset>
+                            <div class="d-flex justify-content-start">
+                                <li class="list-group-item">
+
+
+                                    <label for="checkbox-ap"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="ap" id="checkbox-secciones flexCheckDefault"> AP
+                                    </label>
+                                    <label for="checkbox-bp"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="bp" id="checkbox-secciones flexCheckDefault"> BP
+                                    </label>
+                                    <label for="checkbox-cp"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="cp" id="checkbox-secciones flexCheckDefault"> CP
+                                    </label>
+                                    <label for="checkbox-dp"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="dp" id="checkbox-secciones flexCheckDefault"> DP
+                                    </label>
+                                    <label for="checkbox-ep"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="ep" id="checkbox-secciones flexCheckDefault"> EP
+                                    </label>
+                                    <label for="checkbox-rosario"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="rosario" id="checkbox-secciones flexCheckDefault">
+                                        ROSARIO </label>
+                                    <label for="checkbox-ug"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="ug" id="checkbox-secciones flexCheckDefault">
+                                        UGARTECHE </label>
+                                    <label for="checkbox-e1"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="e1" id="checkbox-secciones flexCheckDefault">
+                                        Plat.1-4 </label>
+                                    <label for="checkbox-e2"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="e2" id="checkbox-secciones flexCheckDefault">
+                                        Plat.4-8 </label>
+                                    <label for="checkbox-puerto"><input class="form-check-input" type="checkbox"
+                                            name="secciones" value="puerto" id="checkbox-secciones flexCheckDefault">
+                                        PUERTO/FEPSA </label>
+                                </li>
+                        </fieldset>
+                        </p><br>
+                    </div>
+
+                    <div class="d-flex justify-content-start">
+                        <p><label for="conductor">Nº de Conductores</label><input type="number" id="conductor" name="conductor"maxlength="2" class="input-number" oninput="generarCampos('conductor', 'conductorCampos', 'relevoConductorCampos')" required></p>
+                        <p><label for="guarda">Nº de Guardas</label><input type="number" id="guarda" name="guarda"maxlength="2" class="input-number"  oninput="generarCampos('guarda', 'guardaCampos', 'relevoGuardaCampos')" required></p>
+                        <p><label for="piloto">Nº de Pilotos</label><input type="number" id="piloto" name="piloto"maxlength="2" class="input-number" oninput="generarCampos('piloto', 'pilotoCampos', 'relevoPilotoCampos')" required></p>
+                    </div>
+                    <div id="conductorCampos" class="row g-3"></div>
+                    <div id="relevoConductorCampos" class="row g-3"></div>
+                    <div id="guardaCampos" class="row g-3"></div>
+                    <div id="relevoGuardaCampos" class="row g-3"></div>
+                    <div id="pilotoCampos" class="row g-3"></div>
+                    <div id="relevoPilotoCampos" class="row g-3"></div>
+
+
+                    <!--<div class="col-md-2">
+                        <h4>Conductor</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20} required>
+                            <label for="nombre" for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <h5>Relevo</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20}>
+                            <label for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>Pre-Conductor</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20} required>
+                            <label for="nombre" for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <h5>Relevo</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20}>
+                            <label for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h4>Guarda</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20} required>
+                            <label for="nombre" for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <h5>Relevo</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20}>
+                            <label for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h4>Piloto</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20} required>
+                            <label for="nombre" for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <h5>Relevo</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="floatingInputGrid" name="legajo" maxlength="6"
+                                class="input-number">
+                            <label for="floatingInputGrid">Servicio</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="floatingInputGrid" name="nombre"
+                                pattern=[A-Z\sa-z]{3,20}>
+                            <label for="floatingInputGrid">Nombre y Apellido</label>
+                        </div>
+                    </div>
+                    <br><br>-->
+
+            </div>
+
+            <div class="col-md-12" style="display: inline-block;">
+
+                <button type="button" class="btn btn-success" onclick="imprimirPDF()">Imprimir</button>
+                <button type="button" class="btn btn-warning" onclick="limpiarCampos()" id="btnCancelar">Cancelar</button>
+
+            </div>
+            </form>
+        </div>
+
+    </main>
+    <script>
+        function generarCampos(tipo, contenedorId, contenedorRelevoId) {
+            const cantidad = document.getElementById(tipo).value;
+            const contenedor = document.getElementById(contenedorId);
+            const contenedorRelevo = document.getElementById(contenedorRelevoId);
+            contenedor.innerHTML = "";
+            contenedorRelevo.innerHTML = "";
+
+            for (let i = 0; i < cantidad; i++) {
+                // Campos de Conductor, Guarda o Piloto
+            const div = document.createElement("div");
+            div.classList.add("col-md-3");
+            const h4 = document.createElement("h4");
+            h4.textContent = tipo.charAt(0).toUpperCase() + tipo.slice(1);
+            div.appendChild(h4);
+            contenedor.appendChild(div);
+
+            // Campos de Servicio
+            const colServicio = document.createElement("div");
+            colServicio.classList.add("col-md-2");
+
+            const formGroupServicio = document.createElement("div");
+            formGroupServicio.classList.add("form-floating");
+
+            const inputServicio = document.createElement("input");
+            inputServicio.type = "number";
+            inputServicio.classList.add("form-control", "input-number");
+            inputServicio.name = `${tipo}_legajo[]`;
+            inputServicio.maxLength = 6;
+
+            const labelServicio = document.createElement("label");
+            labelServicio.setAttribute("for", `floatingInputGrid_${tipo}_${i}`);
+            labelServicio.textContent = "Servicio";
+
+            formGroupServicio.appendChild(inputServicio);
+            formGroupServicio.appendChild(labelServicio);
+            colServicio.appendChild(formGroupServicio);
+
+            // Campos de Nombre
+            const colNombre = document.createElement("div");
+            colNombre.classList.add("col-md-6");
+
+            const formGroupNombre = document.createElement("div");
+            formGroupNombre.classList.add("form-floating");
+
+            const inputNombre = document.createElement("input");
+            inputNombre.type = "text";
+            inputNombre.classList.add("form-control");
+            inputNombre.name = `${tipo}_nombre[]`;
+            inputNombre.pattern = "[A-Z\\sa-z]{3,20}";
+            inputNombre.required = true;
+
+            const labelNombre = document.createElement("label");
+            labelNombre.setAttribute("for", `floatingInputGrid_${tipo}_${i}`);
+            labelNombre.textContent = "Nombre y Apellido";
+
+            formGroupNombre.appendChild(inputNombre);
+            formGroupNombre.appendChild(labelNombre);
+            colNombre.appendChild(formGroupNombre);
+
+            // Agregamos al contenedor
+            contenedor.appendChild(colServicio);
+            contenedor.appendChild(colNombre);
+
+            // Campos de Relevo
+            const divRelevo = document.createElement("div");
+            divRelevo.classList.add("col-md-3");
+            const h5Relevo = document.createElement("h5");
+            h5Relevo.textContent = "Relevo";
+            divRelevo.appendChild(h5Relevo);
+            contenedorRelevo.appendChild(divRelevo);
+
+            // Campos de Servicio para Relevo
+            const colServicioRelevo = document.createElement("div");
+            colServicioRelevo.classList.add("col-md-2");
+
+            const formGroupServicioRelevo = document.createElement("div");
+            formGroupServicioRelevo.classList.add("form-floating");
+
+            const inputServicioRelevo = document.createElement("input");
+            inputServicioRelevo.type = "number";
+            inputServicioRelevo.classList.add("form-control", "input-number");
+            inputServicioRelevo.name = `relevo_${tipo}_legajo[]`;
+            inputServicioRelevo.maxLength = 6;
+
+            const labelServicioRelevo = document.createElement("label");
+            labelServicioRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_${i}`);
+            labelServicioRelevo.textContent = "Servicio";
+
+            formGroupServicioRelevo.appendChild(inputServicioRelevo);
+            formGroupServicioRelevo.appendChild(labelServicioRelevo);
+            colServicioRelevo.appendChild(formGroupServicioRelevo);
+
+            // Campos de Nombre para Relevo
+            const colNombreRelevo = document.createElement("div");
+            colNombreRelevo.classList.add("col-md-6");
+
+            const formGroupNombreRelevo = document.createElement("div");
+            formGroupNombreRelevo.classList.add("form-floating");
+
+            const inputNombreRelevo = document.createElement("input");
+            inputNombreRelevo.type = "text";
+            inputNombreRelevo.classList.add("form-control");
+            inputNombreRelevo.name = `relevo_${tipo}_nombre[]`;
+            inputNombreRelevo.pattern = "[A-Z\\sa-z]{3,20}";
+
+            const labelNombreRelevo = document.createElement("label");
+            labelNombreRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_${i}`);
+            labelNombreRelevo.textContent = "Nombre y Apellido";
+
+            formGroupNombreRelevo.appendChild(inputNombreRelevo);
+            formGroupNombreRelevo.appendChild(labelNombreRelevo);
+            colNombreRelevo.appendChild(formGroupNombreRelevo);
+
+            // Agregamos al contenedor de Relevo
+            contenedorRelevo.appendChild(colServicioRelevo);
+            contenedorRelevo.appendChild(colNombreRelevo);
+
+            // Dentro de la función generarCampos, donde creas los campos dinámicos
+inputServicio.setAttribute("data-index", i);
+inputNombre.setAttribute("data-index", i);
+inputServicioRelevo.setAttribute("data-index", i);
+inputNombreRelevo.setAttribute("data-index", i);
+
+        }
+    }
+    
+    function imprimirPDF() {
+    var documento = new jsPDF();
+    documento.setFontSize(12);
+    var yPosition = 20;
+
+    var responsable = document.getElementById('responsable').value.trim();
+    var numTrabajo = document.getElementById('trabajo').value.trim();
+
+    if (!responsable || !numTrabajo) {
+        alert('Por favor, ingrese el Responsable y el Número de Trabajo.');
+        return;
+    }
+
+    var secciones = document.querySelectorAll('input[name="secciones"]:checked');
+    var seccionesSeleccionadas = Array.from(secciones).map(seccion => seccion.value);
+
+    // Función para agregar detalles al PDF si el campo no está vacío
+    function agregarDetalle(texto) {
+        if (texto) {
+            documento.text(20, yPosition, texto);
+            yPosition += 10;
+        }
+    }
+
+    agregarDetalle('Responsable: ' + responsable);
+    agregarDetalle('Número de Trabajo: ' + numTrabajo);
+    agregarDetalle('Secciones: ' + seccionesSeleccionadas.join(', '));
+
+    function agregarDetallesPersonal(tipo, cantidad, contenedorId) {
+        for (var i = 0; i < cantidad; i++) {
+            var servicioElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_legajo[]"][data-index="${i}"]`);
+            var nombreElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
+            var servicio = servicioElement ? servicioElement.value.trim() : '';
+            var nombre = nombreElement ? nombreElement.value.trim() : '';
+
+            if (!servicio && !nombre) {
+                continue; // Saltar a la siguiente iteración si ambos campos están vacíos
+            }
+
+            var detalle = `${tipo} ${i + 1}:`;
+            if (servicio) {
+                detalle += ` Servicio ${servicio},`;
+            }
+            if (nombre) {
+                detalle += ` Nombre ${nombre}`;
+            }
+            agregarDetalle(detalle);
+        }
+    }
+
+    var numConductores = document.getElementById('conductor').value;
+    var numGuardas = document.getElementById('guarda').value;
+    var numPilotos = document.getElementById('piloto').value;
+
+    agregarDetallesPersonal('Conductor', numConductores, 'conductorCampos');
+    agregarDetallesPersonal('Relevo de Conductor', numConductores, 'relevoConductorCampos');
+    agregarDetallesPersonal('Guarda', numGuardas, 'guardaCampos');
+    agregarDetallesPersonal('Relevo de Guarda', numGuardas, 'relevoGuardaCampos');
+    agregarDetallesPersonal('Piloto', numPilotos, 'pilotoCampos');
+    agregarDetallesPersonal('Relevo de Piloto', numPilotos, 'relevoPilotoCampos');
+
+    documento.save('formulario.pdf');
+}
+
+        function limpiarCampos() {
+    const elementos = document.querySelectorAll('input[type="number"], input[type="text"]');
+    elementos.forEach(elemento => {
+        elemento.value = "";
+    });
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+}
+
+// Asignamos las funciones a los botones
+document.getElementById("btnImprimir").addEventListener("click", imprimirPDF);
+document.getElementById("btnCancelar").addEventListener("click", limpiarCampos);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+        </script>
+    <script src="personal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script type="text/javascript" src="/jspdf.min.js"></script>
+</body>
+
+<footer>
+    <img class="rodapie" src="imagenes/logo-grisSin-fondo.png" width="125px" height="125px">
+    <p class="eslogan">Navegá más allá de lo esperado</p>
+    <p class="brand-copy"> copyright 2024 - FHD</p>
+    
+</footer>
+
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "mesapersonal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "personal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^6.1.1",
+    "git-pages": "^0.8.1"
+  }
+}

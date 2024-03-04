@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="personal.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title> Mesa Personal by FHD</title>
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Mesa Personal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registroCond.html">Registro Conductor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registroGuarda.html">Registro GuardaTren</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="corridaTrabajos.html">Corridas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="listas.html">Listas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" aria-disabled="true" href="registroPersonal.html">Base de
+                                datos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+    </header>
+
+    <main>
+        <body>
+            <h1>Registro de Conductores</h1>
+        
+        <div class="d-flex justify-content-start">
+            <form>
+                
+                <form action="/register" method="POST">
+                    <div>
+                        
+                        <label for="rol">Seleccione</label>
+                        <select name="rol" id="rol" class="rol">
+                            <option value="electrico" selected>Cond. Diesel</option>
+                            <option value="diesel" >Cond. Electrico</option>
+                            <option value="instructorld" >Instructor Tec. LF LD</option>
+                            <option value="instructorelec" >Instructor Tec. LF Elec.</option>
+                            <option value="inspectorelec" >Inspector Tec. LF Elec.</option>
+                            <option value="inspectorld" >Inspector Tec. LF LD.</option>
+                            <option value="preConductor">Pre-Cond. Operativo</option>
+                        </select>
+                        <label for="nombre">Nombre y Apellido</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellido"
+                            pattern=[A-Z\sa-z]{3,20} required>
+                        <label for="legajo">Legajo</label>
+                        <input type="number" id="legajo" name="legajo" maxlength="6" class="input-number" required>
+                        <label for="servicio">Servicio</label>
+                        <input type="number" id="servicio" name="legajo" maxlength="6" class="input-number" required>
+                        <label for="rol">Tarea</label>
+                            <select name="rol" id="rol" class="rol">
+                            <option value="357" selected>357</option>
+                            <option value="358" >358</option>
+                            <option value="427" >427</option>
+                            <option value="428" >428</option>
+                            <option value="576" >576</option>
+                            </select>
+                        <label for="dni">DNI</label>
+                        <input type="number" id="dni" name="dni" maxlength="7" placeholder="XX.XXX.XXX" class="input-number" required>
+                        <label for="nacimiento">Fecha Nac.</label>
+                        <input type="date" id="nacimiento" name="nacimiento" class="input-number" required>
+                        <label for="ingreso">Fecha Ingreso</label>
+                        <input type="date" id="ingreso" name="ingreso" class="input-number" required>
+                        <label for="cupon">Venc. Cupón</label>
+                        <input type="date" id="cupon" name="cupon" class="input-number" >
+                        <label for="rol">Base perteneciente</label>
+                            <select name="rol" id="rol" class="rol">
+                            <option value="suarez" selected>Suarez</option>
+                            <option value="victoria" >Victoria</option>
+                            <option value="instructorld" >Retiro</option>
+                            </select>
+
+                        <div>
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" placeholder="ejemplo@email.com" required>
+                        </div><br>
+
+                        <div>
+                            <label for="calle">Calle</label>
+                            <input type="text" id="direccion" name="direccion" placeholder="Dirección"
+                                pattern=[A-Z\sa-z]{3,20} required>
+                            <label for="localidad">Localidad</label>
+                            <input type="text" id="localidad" name="localidad" placeholder="Barrio o Partido"
+                                pattern=[A-Z\sa-z]{3,20} required><br>
+                            <label for="provincia">Provincia</label>
+                            <input type="text" id="provincia" name="provincia" placeholder="Provincia"
+                                pattern=[A-Z\sa-z]{3,20} required>
+                            <label for="piso">Piso</label>
+                            <input type="number" id="piso" name="piso" maxlength="2" class="input-number"><br>
+                            <label for="dpto">Dpto</label>
+                            <input type="text" id="dpto" name="dpto" placeholder="Departamento"
+                                pattern=[A-Z\sa-z]{3,20}>
+                            <label for="cp">Codigo Postal</label>
+                            <input type="number" id="cp" name="cp" maxlength="6" class="input-number">
+                        </div>
+
+                        <div>
+                     
+                            <label for="tel">Teléfono</label>
+                            <input type="text" id="tel" name="tel" placeholder="11-XXXX-XXXX"><br>
+                        </div><br>
+
+                        <div class="d-flex justify-content-start">
+                            <h3>Conocimiento de Vías</h3>
+                            <fieldset>
+                                <div class="d-flex justify-content-start">
+                                    <ul class="lista1 form-check-inline form-switch">
+                                        <li><label for="checkbox-ap"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="ap"
+                                                    id="checkbox-secciones flexCheckDefault"> AP </label></li>
+                                        <li><label for="checkbox-bp"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="bp"
+                                                    id="checkbox-secciones flexCheckDefault"> BP </label></li>
+                                        <li><label for="checkbox-cp"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="cp"
+                                                    id="checkbox-secciones flexCheckDefault"> CP </label></li>
+                                        <li><label for="checkbox-dp"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="dp"
+                                                    id="checkbox-secciones flexCheckDefault"> DP </label></li>
+                                        <li><label for="checkbox-ep"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="ep"
+                                                    id="checkbox-secciones flexCheckDefault"> EP </label></li>
+                                        <li><label for="checkbox-rosario"><input class="form-check-input"
+                                                    type="checkbox" name="secciones" value="rosario"
+                                                    id="checkbox-secciones flexCheckDefault"> ROSARIO </label></li>
+                                        <li><label for="checkbox-ug"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="ug"
+                                                    id="checkbox-secciones flexCheckDefault"> UGARTECHE </label></li>
+                                        <li><label for="checkbox-e1"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="e1"
+                                                    id="checkbox-secciones flexCheckDefault"> Plat.1-4 </label></li>
+                                        <li><label for="checkbox-e2"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="e2"
+                                                    id="checkbox-secciones flexCheckDefault"> Plat.4-8 </label></li>
+                                        <li><label for="checkbox-puerto"><input class="form-check-input" type="checkbox"
+                                                    name="secciones" value="puerto"
+                                                    id="checkbox-secciones flexCheckDefault"> PUERTO </label></li>
+                                    </ul>
+
+                            </fieldset>
+                        </div>
+
+                        <div style="display: inline;">
+                            <input type="submit" class="btn btn-success" value="Registrar">
+                            <a href="/" class="btn btn-warning">Cancel</a>
+                        </div>
+                </form>
+        </div>
+
+
+
+        </form>
+        </div>
+        
+    </body>
+
+
+    </main>
+
+
+</body>
+<footer>
+
+
+    <img class="rodapie" src="imagenes/logo-grisSin-fondo.png" width="125px" height="125px">
+    <p class="eslogan">Navegá más allá de lo esperado</p>
+    <p class="brand-copy"> copyright 2023 - FHD</p>
+    <p>Developed by FHD</p>
+
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
+</script>
+<script src="personal.js"></script>
+
+</html>
