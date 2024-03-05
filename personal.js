@@ -1,4 +1,5 @@
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+
+
 document.getElementById('navigationForm').addEventListener('submit', function (event) {
     event.preventDefault();
     var selectedOption = document.getElementById('rol').value;
