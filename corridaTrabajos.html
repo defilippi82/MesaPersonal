@@ -351,7 +351,7 @@
         colHoraSalida.appendChild(formGroupHoraSalida);
 
             // Agregamos al contenedor
-            contenedor.appendChild(colServicio);
+            contenedor.appendChild(colLegajo);
             contenedor.appendChild(colNombre);
             contenedor.appendChild(colHoraInicio);
             contenedor.appendChild(colHoraSalida);
@@ -491,18 +491,18 @@ inputNombreRelevo.setAttribute("data-index", i);
 
     function agregarDetallesPersonal(tipo, cantidad, contenedorId) {
         for (var i = 0; i < cantidad; i++) {
-            var servicioElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_legajo[]"][data-index="${i}"]`);
+            var legajoElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_legajo[]"][data-index="${i}"]`);
             var nombreElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
-            var servicio = servicioElement ? servicioElement.value.trim() : '';
+            var legajo = legajoElement ? legajoElement.value.trim() : '';
             var nombre = nombreElement ? nombreElement.value.trim() : '';
 
-            if (!servicio && !nombre) {
+            if (!legajo && !nombre) {
                 continue; // Saltar a la siguiente iteración si ambos campos están vacíos
             }
 
             var detalle = `${tipo} ${i + 1}:`;
             if (servicio) {
-                detalle += ` Servicio ${servicio},`;
+                detalle += ` Servicio ${legajo},`;
             }
             if (nombre) {
                 detalle += ` Nombre ${nombre}`;
