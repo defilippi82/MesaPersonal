@@ -96,7 +96,7 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
 
         const labelHoraInicio = document.createElement("label");
         labelHoraInicio.setAttribute("for", `floatingInputGrid_${tipo.toLowerCase()}_hora_inicio_${i}`);
-        labelHoraInicio.textContent = "Hora de Inicio";
+        labelHoraInicio.textContent = "Hora de Tomada";
 
         formGroupHoraInicio.appendChild(inputHoraInicio);
         formGroupHoraInicio.appendChild(labelHoraInicio);
@@ -116,7 +116,7 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
 
         const labelHoraSalida = document.createElement("label");
         labelHoraSalida.setAttribute("for", `floatingInputGrid_${tipo.toLowerCase()}_hora_salida_${i}`);
-        labelHoraSalida.textContent = "Hora de Salida";
+        labelHoraSalida.textContent = "Hora de Dejada";
 
         formGroupHoraSalida.appendChild(inputHoraSalida);
         formGroupHoraSalida.appendChild(labelHoraSalida);
@@ -192,7 +192,7 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
 
         const labelHoraInicioRelevo = document.createElement("label");
         labelHoraInicioRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo.toLowerCase()}_hora_inicio_${i}`);
-        labelHoraInicioRelevo.textContent = "Hora de Inicio";
+        labelHoraInicioRelevo.textContent = "Hora de Tomada";
 
         formGroupHoraInicioRelevo.appendChild(inputHoraInicioRelevo);
         formGroupHoraInicioRelevo.appendChild(labelHoraInicioRelevo);
@@ -212,7 +212,7 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
 
         const labelHoraSalidaRelevo = document.createElement("label");
         labelHoraSalidaRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo.toLowerCase()}_hora_salida_${i}`);
-        labelHoraSalidaRelevo.textContent = "Hora de Salida";
+        labelHoraSalidaRelevo.textContent = "Hora de Dejada";
 
         formGroupHoraSalidaRelevo.appendChild(inputHoraSalidaRelevo);
         formGroupHoraSalidaRelevo.appendChild(labelHoraSalidaRelevo);
