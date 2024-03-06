@@ -267,26 +267,26 @@
             div.appendChild(h4);
             contenedor.appendChild(div);
 
-            // Campos de Servicio
-            const colServicio = document.createElement("div");
-            colServicio.classList.add("col-md-2");
+            // Campos de Legajo
+            const colLegajo = document.createElement("div");
+            colLegajo.classList.add("col-md-2");
 
-            const formGroupServicio = document.createElement("div");
-            formGroupServicio.classList.add("form-floating");
+            const fromGroupLegajo = document.createElement("div");
+            fromGroupLegajo.classList.add("form-floating");
 
-            const inputServicio = document.createElement("input");
-            inputServicio.type = "number";
-            inputServicio.classList.add("form-control", "input-number");
-            inputServicio.name = `${tipo}_legajo[]`;
-            inputServicio.maxLength = 6;
+            const inputLegajo = document.createElement("input");
+            inputLegajo.type = "number";
+            inputLegajo.classList.add("form-control", "input-number");
+            inputLegajo.name = `${tipo}_legajo[]`;
+            inputLegajo.maxLength = 6;
 
-            const labelServicio = document.createElement("label");
-            labelServicio.setAttribute("for", `floatingInputGrid_${tipo}_${i}`);
-            labelServicio.textContent = "Servicio";
+            const labelLegajo = document.createElement("label");
+            labelLegajo.setAttribute("for", `floatingInputGrid_${tipo}_${i}`);
+            labelLegajo.textContent = "Legajo";
 
-            formGroupServicio.appendChild(inputServicio);
-            formGroupServicio.appendChild(labelServicio);
-            colServicio.appendChild(formGroupServicio);
+            formGroupServicio.appendChild(inputLegajo);
+            formGroupServicio.appendChild(labelLegajo);
+            colServicio.appendChild(fromGroupLegajo);
 
             // Campos de Nombre
             const colNombre = document.createElement("div");
@@ -310,9 +310,51 @@
             formGroupNombre.appendChild(labelNombre);
             colNombre.appendChild(formGroupNombre);
 
+            // Campos de Hora de Inicio
+        const colHoraInicio = document.createElement("div");
+        colHoraInicio.classList.add("col-md-2");
+
+        const formGroupHoraInicio = document.createElement("div");
+        formGroupHoraInicio.classList.add("form-floating");
+
+        const inputHoraInicio = document.createElement("input");
+        inputHoraInicio.type = "time";
+        inputHoraInicio.classList.add("form-control");
+        inputHoraInicio.name = `${tipo}_hora_inicio[]`;
+
+        const labelHoraInicio = document.createElement("label");
+        labelHoraInicio.setAttribute("for", `floatingInputGrid_${tipo}_hora_inicio_${i}`);
+        labelHoraInicio.textContent = "Hora de Inicio";
+
+        formGroupHoraInicio.appendChild(inputHoraInicio);
+        formGroupHoraInicio.appendChild(labelHoraInicio);
+        colHoraInicio.appendChild(formGroupHoraInicio);
+
+        // Campos de Hora de Salida
+        const colHoraSalida = document.createElement("div");
+        colHoraSalida.classList.add("col-md-2");
+
+        const formGroupHoraSalida = document.createElement("div");
+        formGroupHoraSalida.classList.add("form-floating");
+
+        const inputHoraSalida = document.createElement("input");
+        inputHoraSalida.type = "time";
+        inputHoraSalida.classList.add("form-control");
+        inputHoraSalida.name = `${tipo}_hora_salida[]`;
+
+        const labelHoraSalida = document.createElement("label");
+        labelHoraSalida.setAttribute("for", `floatingInputGrid_${tipo}_hora_salida_${i}`);
+        labelHoraSalida.textContent = "Hora de Salida";
+
+        formGroupHoraSalida.appendChild(inputHoraSalida);
+        formGroupHoraSalida.appendChild(labelHoraSalida);
+        colHoraSalida.appendChild(formGroupHoraSalida);
+
             // Agregamos al contenedor
             contenedor.appendChild(colServicio);
             contenedor.appendChild(colNombre);
+            contenedor.appendChild(colHoraInicio);
+            contenedor.appendChild(colHoraSalida);
 
             // Campos de Relevo
             const divRelevo = document.createElement("div");
@@ -322,26 +364,26 @@
             divRelevo.appendChild(h5Relevo);
             contenedorRelevo.appendChild(divRelevo);
 
-            // Campos de Servicio para Relevo
-            const colServicioRelevo = document.createElement("div");
-            colServicioRelevo.classList.add("col-md-2");
+            // Campos de Legajo para Relevo
+            const colLegajoRelevo = document.createElement("div");
+            colLegajoRelevo.classList.add("col-md-2");
 
-            const formGroupServicioRelevo = document.createElement("div");
-            formGroupServicioRelevo.classList.add("form-floating");
+            const formGroupLegajoRelevo = document.createElement("div");
+            formGroupLegajoRelevo.classList.add("form-floating");
 
-            const inputServicioRelevo = document.createElement("input");
-            inputServicioRelevo.type = "number";
-            inputServicioRelevo.classList.add("form-control", "input-number");
-            inputServicioRelevo.name = `relevo_${tipo}_legajo[]`;
-            inputServicioRelevo.maxLength = 6;
+            const inputLegajoRelevo = document.createElement("input");
+            inputLegajoRelevo.type = "number";
+            inputLegajoRelevo.classList.add("form-control", "input-number");
+            inputLegajoRelevo.name = `relevo_${tipo}_legajo[]`;
+            inputLegajoRelevo.maxLength = 6;
 
-            const labelServicioRelevo = document.createElement("label");
-            labelServicioRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_${i}`);
-            labelServicioRelevo.textContent = "Servicio";
+            const labelLegajoRelevo = document.createElement("label");
+            labelLegajoRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_${i}`);
+            labelLegajoRelevo.textContent = "Servicio";
 
-            formGroupServicioRelevo.appendChild(inputServicioRelevo);
-            formGroupServicioRelevo.appendChild(labelServicioRelevo);
-            colServicioRelevo.appendChild(formGroupServicioRelevo);
+            formGroupLegajoRelevo.appendChild(inputLegajoRelevo);
+            formGroupLegajoRelevo.appendChild(labelLegajoRelevo);
+            colLegajoRelevo.appendChild(formGroupLegajoRelevo);
 
             // Campos de Nombre para Relevo
             const colNombreRelevo = document.createElement("div");
@@ -364,14 +406,56 @@
             formGroupNombreRelevo.appendChild(labelNombreRelevo);
             colNombreRelevo.appendChild(formGroupNombreRelevo);
 
-            // Agregamos al contenedor de Relevo
-            contenedorRelevo.appendChild(colServicioRelevo);
-            contenedorRelevo.appendChild(colNombreRelevo);
+             // Campos de Hora de Inicio para Relevo
+        const colHoraInicioRelevo = document.createElement("div");
+        colHoraInicioRelevo.classList.add("col-md-2");
+
+        const formGroupHoraInicioRelevo = document.createElement("div");
+        formGroupHoraInicioRelevo.classList.add("form-floating");
+
+        const inputHoraInicioRelevo = document.createElement("input");
+        inputHoraInicioRelevo.type = "time";
+        inputHoraInicioRelevo.classList.add("form-control");
+        inputHoraInicioRelevo.name = `relevo_${tipo}_hora_inicio[]`;
+
+        const labelHoraInicioRelevo = document.createElement("label");
+        labelHoraInicioRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_hora_inicio_${i}`);
+        labelHoraInicioRelevo.textContent = "Hora de Inicio";
+
+        formGroupHoraInicioRelevo.appendChild(inputHoraInicioRelevo);
+        formGroupHoraInicioRelevo.appendChild(labelHoraInicioRelevo);
+        colHoraInicioRelevo.appendChild(formGroupHoraInicioRelevo);
+
+        // Campos de Hora de Salida para Relevo
+        const colHoraSalidaRelevo = document.createElement("div");
+        colHoraSalidaRelevo.classList.add("col-md-2");
+
+        const formGroupHoraSalidaRelevo = document.createElement("div");
+        formGroupHoraSalidaRelevo.classList.add("form-floating");
+
+        const inputHoraSalidaRelevo = document.createElement("input");
+        inputHoraSalidaRelevo.type = "time";
+        inputHoraSalidaRelevo.classList.add("form-control");
+        inputHoraSalidaRelevo.name = `relevo_${tipo}_hora_salida[]`;
+
+        const labelHoraSalidaRelevo = document.createElement("label");
+        labelHoraSalidaRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_hora_salida_${i}`);
+        labelHoraSalidaRelevo.textContent = "Hora de Salida";
+
+        formGroupHoraSalidaRelevo.appendChild(inputHoraSalidaRelevo);
+        formGroupHoraSalidaRelevo.appendChild(labelHoraSalidaRelevo);
+        colHoraSalidaRelevo.appendChild(formGroupHoraSalidaRelevo);
+
+        // Agregamos al contenedor de Relevo
+        contenedorRelevo.appendChild(colLegajoRelevo);
+        contenedorRelevo.appendChild(colNombreRelevo);
+        contenedorRelevo.appendChild(colHoraInicioRelevo);
+        contenedorRelevo.appendChild(colHoraSalidaRelevo);
 
             // Dentro de la función generarCampos, donde creas los campos dinámicos
-inputServicio.setAttribute("data-index", i);
+inputLegajo.setAttribute("data-index", i);
 inputNombre.setAttribute("data-index", i);
-inputServicioRelevo.setAttribute("data-index", i);
+inputLegajoRelevo.setAttribute("data-index", i);
 inputNombreRelevo.setAttribute("data-index", i);
 
         }
