@@ -281,7 +281,7 @@
             inputLegajo.maxLength = 6;
 
             const labelLegajo = document.createElement("label");
-            labelLegajo.setAttribute("for", `floatingInputGrid_${tipo}_${i}`);
+            labelLegajo.setAttribute("for", `floatingInputGrid_${tipo}__legajo_${i}`);
             labelLegajo.textContent = "Legajo";
 
             formGroupServicio.appendChild(inputLegajo);
@@ -303,7 +303,7 @@
             inputNombre.required = true;
 
             const labelNombre = document.createElement("label");
-            labelNombre.setAttribute("for", `floatingInputGrid_${tipo}_${i}`);
+            labelNombre.setAttribute("for", `floatingInputGrid_${tipo}_{tipo}_nombre_${i}`);
             labelNombre.textContent = "Nombre y Apellido";
 
             formGroupNombre.appendChild(inputNombre);
@@ -378,7 +378,7 @@
             inputLegajoRelevo.maxLength = 6;
 
             const labelLegajoRelevo = document.createElement("label");
-            labelLegajoRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_${i}`);
+            labelLegajoRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_legajo_${i}`);
             labelLegajoRelevo.textContent = "Servicio";
 
             formGroupLegajoRelevo.appendChild(inputLegajoRelevo);
@@ -399,7 +399,7 @@
             inputNombreRelevo.pattern = "[A-Z\\sa-z]{3,20}";
 
             const labelNombreRelevo = document.createElement("label");
-            labelNombreRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_${i}`);
+            labelNombreRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo}_nombre_${i}`);
             labelNombreRelevo.textContent = "Nombre y Apellido";
 
             formGroupNombreRelevo.appendChild(inputNombreRelevo);
