@@ -228,130 +228,142 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
 }
 
 function imprimirPDF() {
-var documento = new jsPDF();
-documento.setFontSize(12);
-var yPosition = 20;
+    var documento = new jsPDF();
+    documento.setFontSize(12);
+      // Agregar Encabezado
+      documento.text(20, 10, "Trenes Argentinos");
+      // Dibujar una línea
+documento.line(20, 10, 100, 10);  // (x1, y1, x2, y2)
+    var yPosition = 20;
 
-var responsable = document.getElementById('responsable').value.trim();
-var numTrabajo = document.getElementById('trabajo').value.trim();
+    var responsable = document.getElementById('responsable').value.trim();
+    var numTrabajo = document.getElementById('trabajo').value.trim();
 
-if (!responsable || !numTrabajo) {
-alert('Por favor, ingrese el Responsable y el Número de Trabajo.');
-return;
-}
-
-var secciones = document.querySelectorAll('input[name="secciones"]:checked');
-var seccionesSeleccionadas = Array.from(secciones).map(seccion => seccion.value);
-
-// Función para agregar detalles al PDF si el campo no está vacío
-function agregarDetalle(texto) {
-if (texto) {
-    documento.text(20, yPosition, texto);
-    yPosition += 10;
-}
-}
-
-agregarDetalle('Responsable: ' + responsable);
-agregarDetalle('Número de Trabajo: ' + numTrabajo);
-agregarDetalle('Secciones: ' + seccionesSeleccionadas.join(', '));
-
-function agregarDetallesPersonal(tipo, cantidad, contenedorId, contenedorRelevoId) {
-for (var i = 0; i < cantidad; i++) {
-    var legajoElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_legajo[]"][data-index="${i}"]`);
-    var nombreElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
-    var horaInicioElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
-    var horaSalidaElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
-
-    var legajo = legajoElement ? legajoElement.value.trim() : '';
-    var nombre = nombreElement ? nombreElement.value.trim() : '';
-    var horaInicio = horaInicioElement ? horaInicioElement.value : '';
-    var horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
-
-    if (!legajo && !nombre && !horaInicio && !horaSalida) {
-        continue; // Saltar a la siguiente iteración si todos los campos están vacíos
+    if (!responsable || !numTrabajo) {
+        alert('Por favor, ingrese el Responsable y/o el Número de Trabajo.');
+        return;
     }
 
-    var detalle = `${tipo} ${i + 1}:`;
-    if (legajo) {
-        detalle += ` Legajo ${legajo},`;
+    var secciones = document.querySelectorAll('input[name="secciones"]:checked');
+    var seccionesSeleccionadas = Array.from(secciones).map(seccion => seccion.value);
+
+    // Función para agregar detalles al PDF si el campo no está vacío
+    function agregarDetalle(texto) {
+        if (texto) {
+            documento.text(20, yPosition, texto);
+            yPosition += 10;
+        }
     }
-    if (nombre) {
-        detalle += ` Nombre ${nombre}`;
+
+    agregarDetalle('Responsable: ' + responsable);
+    agregarDetalle('Número de Trabajo: ' + numTrabajo);
+    agregarDetalle('Secciones: ' + seccionesSeleccionadas.join(', '));
+
+    function agregarDetallesPersonal(tipo, cantidad, contenedorId, contenedorRelevoId) {
+        for (var i = 0; i < cantidad; i++) {
+            var legajoElement = document.querySelector(`.${contenedorClass} input.${tipo.toLowerCase()}_legajo[data-index="${i}"]`);
+            var nombreElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
+            var horaInicioElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
+            var horaSalidaElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
+
+            var legajo = legajoElement ? legajoElement.value.trim() : '';
+            var nombre = nombreElement ? nombreElement.value.trim() : '';
+            var horaInicio = horaInicioElement ? horaInicioElement.value : '';
+            var horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
+
+            if (!legajo && !nombre && !horaInicio && !horaSalida) {
+                continue; // Saltar a la siguiente iteración si todos los campos están vacíos
+            }
+
+            var detalle = `${tipo} ${i + 1}:`;
+            if (legajo) {
+                detalle += ` Legajo ${legajo},`;
+            }
+            if (nombre) {
+                detalle += ` Nombre ${nombre}`;
+            }
+            if (horaInicio) {
+                detalle += `, Hora de Inicio ${horaInicio}`;
+            }
+            if (horaSalida) {
+                detalle += `, Hora de Salida ${horaSalida}`;
+            }
+            agregarDetalle(detalle);
+        }
     }
-    if (horaInicio) {
-        detalle += `, Hora de Inicio ${horaInicio}`;
+
+    function agregarDetallesRelevo(tipo, cantidad, contenedorId) {
+        for (var i = 0; i < cantidad; i++) {
+            var legajoElement = document.querySelector(`.${contenedorClass} input.relevo_${tipo.toLowerCase()}_legajo[data-index="${i}"]`);
+            var nombreElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
+            var horaInicioElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
+            var horaSalidaElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
+
+            var legajo = legajoElement ? legajoElement.value.trim() : '';
+            var nombre = nombreElement ? nombreElement.value.trim() : '';
+            var horaInicio = horaInicioElement ? horaInicioElement.value : '';
+            var horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
+
+            if (!legajo && !nombre && !horaInicio && !horaSalida) {
+                continue; // Saltar a la siguiente iteración si todos los campos están vacíos
+            }
+
+            var detalle = `Relevo de ${tipo} ${i + 1}:`;
+            if (legajo) {
+                detalle += ` Legajo ${legajo},`;
+            }
+            if (nombre) {
+                detalle += ` Nombre ${nombre}`;
+            }
+            if (horaInicio) {
+                detalle += `, Hora de Inicio ${horaInicio}`;
+            }
+            if (horaSalida) {
+                detalle += `, Hora de Salida ${horaSalida}`;
+            }
+            agregarDetalle(detalle);
+        }
     }
-    if (horaSalida) {
-        detalle += `, Hora de Salida ${horaSalida}`;
+
+    var numConductores = document.getElementById('conductor').value;
+    var numConductores = document.getElementsByClassName('conductor').value;
+
+    var numGuardas = document.getElementById('guarda').value;
+    var numPilotos = document.getElementById('piloto').value;
+
+    agregarDetallesPersonal('Conductor', numConductores, 'conductorCampos', 'relevoConductorCampos');
+    agregarDetallesRelevo('Conductor', numConductores, 'relevoConductorCampos');
+    agregarDetallesPersonal('Guarda', numGuardas, 'guardaCampos', 'relevoGuardaCampos');
+    agregarDetallesRelevo('Guarda', numGuardas, 'relevoGuardaCampos');
+    agregarDetallesPersonal('Piloto', numPilotos, 'pilotoCampos', 'relevoPilotoCampos');
+    agregarDetallesRelevo('Piloto', numPilotos, 'relevoPilotoCampos');
+
+    // Agregar sección de observaciones
+    var observaciones = document.getElementById('observaciones').value.trim();
+    if (observaciones) {
+        agregarDetalle('Observaciones: ' + observaciones);
     }
-    agregarDetalle(detalle);
+  // Cambiar el estilo para el pie de página
+  documento.setFontStyle("italic");
+
+// Agregar Pie de Página
+documento.text(20, documento.internal.pageSize.height - 20, "Generado de la Mesa de Personal.");
+
+    documento.save('formulario.pdf');
 }
+
+        function limpiarCampos() {
+    const elementos = document.querySelectorAll('input[type="number"], input[type="text"]');
+    elementos.forEach(elemento => {
+        elemento.value = "";
+    });
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
 }
 
-function agregarDetallesRelevo(tipo, cantidad, contenedorId) {
-for (var i = 0; i < cantidad; i++) {
-    var legajoElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_legajo[]"][data-index="${i}"]`);
-    var nombreElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
-    var horaInicioElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
-    var horaSalidaElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
-
-    var legajo = legajoElement ? legajoElement.value.trim() : '';
-    var nombre = nombreElement ? nombreElement.value.trim() : '';
-    var horaInicio = horaInicioElement ? horaInicioElement.value : '';
-    var horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
-
-    if (!legajo && !nombre && !horaInicio && !horaSalida) {
-        continue; // Saltar a la siguiente iteración si todos los campos están vacíos
-    }
-
-    var detalle = `Relevo de ${tipo} ${i + 1}:`;
-    if (legajo) {
-        detalle += ` Legajo ${legajo},`;
-    }
-    if (nombre) {
-        detalle += ` Nombre ${nombre}`;
-    }
-    if (horaInicio) {
-        detalle += `, Hora de Inicio ${horaInicio}`;
-    }
-    if (horaSalida) {
-        detalle += `, Hora de Salida ${horaSalida}`;
-    }
-    agregarDetalle(detalle);
-}
-}
-
-var numConductores = document.getElementById('conductor').value;
-var numGuardas = document.getElementById('guarda').value;
-var numPilotos = document.getElementById('piloto').value;
-
-agregarDetallesPersonal('Conductor', numConductores, 'conductorCampos', 'relevoConductorCampos');
-agregarDetallesRelevo('Conductor', numConductores, 'relevoConductorCampos');
-agregarDetallesPersonal('Guarda', numGuardas, 'guardaCampos', 'relevoGuardaCampos');
-agregarDetallesRelevo('Guarda', numGuardas, 'relevoGuardaCampos');
-agregarDetallesPersonal('Piloto', numPilotos, 'pilotoCampos', 'relevoPilotoCampos');
-agregarDetallesRelevo('Piloto', numPilotos, 'relevoPilotoCampos');
-
-// Agregar sección de observaciones
-var observaciones = document.getElementById('observaciones').value.trim();
-if (observaciones) {
-agregarDetalle('Observaciones: ' + observaciones);
-}
-
-documento.save('formulario.pdf');
-}
-
-function limpiarCampos() {
-const elementos = document.querySelectorAll('input[type="number"], input[type="text"]');
-elementos.forEach(elemento => {
-elemento.value = "";
-});
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-checkboxes.forEach(checkbox => {
-checkbox.checked = false;
-});
-}
-
-// Asignamos las funciones a los botones
-document.getElementById("btnImprimir").addEventListener("click", imprimirPDF);
-document.getElementById("btnCancelar").addEventListener("click", limpiarCampos);
+    // Asignamos las funciones a los botones
+   document.getElementById("btnImprimir").addEventListener("click", imprimirPDF);
+    document.getElementById("btnCancelar").addEventListener("click", limpiarCampos);
+    
