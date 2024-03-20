@@ -25,6 +25,7 @@ function getDestinationUrl(selectedOption) {
 }
 //Funciones de Corridas de Trabajos
 
+
 function generarCampos(tipo, contenedorId, contenedorRelevoId) {
     const cantidad = document.getElementById(tipo).value;
     const contenedor = document.getElementById(contenedorId);
@@ -53,8 +54,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputLegajo.name = `${tipo}_legajo[]`;
         inputLegajo.maxLength = 6;
         inputLegajo.id = `floatingInputGrid_${tipo.toLowerCase()}_legajo_${i}`;
-        //inputLegajo.classList.add("form-control", "input-number", `${tipo.toLowerCase()}_legajo`);
-
+        inputLegajo.setAttribute('data-index', i);
+        inputLegajo.classList.add(`${tipo.toLowerCase()}-legajo`);
 
         const labelLegajo = document.createElement("label");
         labelLegajo.setAttribute("for", `floatingInputGrid_${tipo.toLowerCase()}_legajo_${i}`);
@@ -77,7 +78,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputNombre.pattern = "[A-Z\\sa-z]{3,20}";
         inputNombre.required = true;
         inputNombre.id = `floatingInputGrid_${tipo.toLowerCase()}_nombre_${i}`;
-        //inputNombre.classList.add("form-control", `${tipo.toLowerCase()}_nombre`);
+        inputNombre.setAttribute('data-index', i);
+        inputNombre.classList.add(`${tipo.toLowerCase()}-nombre`);
 
         const labelNombre = document.createElement("label");
         labelNombre.setAttribute("for", `floatingInputGrid_${tipo.toLowerCase()}_nombre_${i}`);
@@ -98,6 +100,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputHoraInicio.classList.add("form-control");
         inputHoraInicio.name = `${tipo}_hora_inicio[]`;
         inputHoraInicio.id = `floatingInputGrid_${tipo.toLowerCase()}_hora_inicio_${i}`;
+        inputHoraInicio.setAttribute('data-index', i);
+        inputHoraInicio.classList.add(`${tipo.toLowerCase()}-hora-inicio`);
 
         const labelHoraInicio = document.createElement("label");
         labelHoraInicio.setAttribute("for", `floatingInputGrid_${tipo.toLowerCase()}_hora_inicio_${i}`);
@@ -118,6 +122,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputHoraSalida.classList.add("form-control");
         inputHoraSalida.name = `${tipo}_hora_salida[]`;
         inputHoraSalida.id = `floatingInputGrid_${tipo.toLowerCase()}_hora_salida_${i}`;
+        inputHoraSalida.setAttribute('data-index', i);
+        inputHoraSalida.classList.add(`${tipo.toLowerCase()}-hora-salida`);
 
         const labelHoraSalida = document.createElement("label");
         labelHoraSalida.setAttribute("for", `floatingInputGrid_${tipo.toLowerCase()}_hora_salida_${i}`);
@@ -153,8 +159,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputLegajoRelevo.name = `relevo_${tipo}_legajo[]`;
         inputLegajoRelevo.maxLength = 6;
         inputLegajoRelevo.id = `floatingInputGrid_relevo_${tipo.toLowerCase()}_legajo_${i}`;
-       inputLegajoRelevo.classList.add("form-control", "input-number", `relevo_${tipo.toLowerCase()}_legajo`);
-
+        inputLegajoRelevo.setAttribute('data-index', i);
+        inputLegajoRelevo.classList.add(`relevo-${tipo.toLowerCase()}-legajo`);
 
         const labelLegajoRelevo = document.createElement("label");
         labelLegajoRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo.toLowerCase()}_legajo_${i}`);
@@ -176,6 +182,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputNombreRelevo.name = `relevo_${tipo}_nombre[]`;
         inputNombreRelevo.pattern = "[A-Z\\sa-z]{3,20}";
         inputNombreRelevo.id = `floatingInputGrid_relevo_${tipo.toLowerCase()}_nombre_${i}`;
+        inputNombreRelevo.setAttribute('data-index', i);
+        inputNombreRelevo.classList.add(`relevo-${tipo.toLowerCase()}-nombre`);
 
         const labelNombreRelevo = document.createElement("label");
         labelNombreRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo.toLowerCase()}_nombre_${i}`);
@@ -196,6 +204,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputHoraInicioRelevo.classList.add("form-control");
         inputHoraInicioRelevo.name = `relevo_${tipo}_hora_inicio[]`;
         inputHoraInicioRelevo.id = `floatingInputGrid_relevo_${tipo.toLowerCase()}_hora_inicio_${i}`;
+        inputHoraInicioRelevo.setAttribute('data-index', i);
+        inputHoraInicioRelevo.classList.add(`relevo-${tipo.toLowerCase()}-hora-inicio`);
 
         const labelHoraInicioRelevo = document.createElement("label");
         labelHoraInicioRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo.toLowerCase()}_hora_inicio_${i}`);
@@ -216,6 +226,8 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         inputHoraSalidaRelevo.classList.add("form-control");
         inputHoraSalidaRelevo.name = `relevo_${tipo}_hora_salida[]`;
         inputHoraSalidaRelevo.id = `floatingInputGrid_relevo_${tipo.toLowerCase()}_hora_salida_${i}`;
+        inputHoraSalidaRelevo.setAttribute('data-index', i);
+        inputHoraSalidaRelevo.classList.add(`relevo-${tipo.toLowerCase()}-hora-salida`);
 
         const labelHoraSalidaRelevo = document.createElement("label");
         labelHoraSalidaRelevo.setAttribute("for", `floatingInputGrid_relevo_${tipo.toLowerCase()}_hora_salida_${i}`);
@@ -233,130 +245,107 @@ function generarCampos(tipo, contenedorId, contenedorRelevoId) {
         contenedorRelevo.appendChild(divRelevo);
     }
 }
-
 function imprimirPDF() {
-var documento = new jsPDF();
-documento.setFontSize(12);
-// Agregar Encabezado
-documento.text(20, 10, "Trenes Argentinos");
-// Dibujar una línea
-documento.line(20, 10, 100, 10);  // (x1, y1, x2, y2)
-var yPosition = 20;
+    const documento = new jsPDF();
+    documento.setFontSize(12);
 
-var responsable = document.getElementById('responsable').value.trim();
-var numTrabajo = document.getElementById('trabajo').value.trim();
+    // Agregar Encabezado
+    documento.text(20, 10, "Trenes Argentinos");
+    documento.line(20, 10, 100, 10); // (x1, y1, x2, y2)
+    let yPosition = 20;
 
-if (!responsable || !numTrabajo) {
-alert('Por favor, ingrese el Responsable y/o el Número de Trabajo.');
-return;
-}
+    const responsable = document.getElementById('responsable').value.trim();
+    const numTrabajo = document.getElementById('trabajo').value.trim();
 
-var secciones = document.querySelectorAll('input[name="secciones"]:checked');
-var seccionesSeleccionadas = Array.from(secciones).map(seccion => seccion.value);
-
-// Función para agregar detalles al PDF si el campo no está vacío
-function agregarDetalle(texto) {
-if (texto) {
-    documento.text(20, yPosition, texto);
-    yPosition += 10;
-}
-}
-
-agregarDetalle('Responsable: ' + responsable);
-agregarDetalle('Número de Trabajo: ' + numTrabajo);
-agregarDetalle('Secciones: ' + seccionesSeleccionadas.join(', '));
-
-function agregarDetallesPersonal(tipo, cantidad, contenedorId, contenedorRelevoId) {
-for (var i = 0; i < cantidad; i++) {
-    var legajoElement = document.querySelector(`.${contenedorClass} input.${tipo.toLowerCase()}_legajo[data-index="${i}"]`);
-    var nombreElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
-    var horaInicioElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
-    var horaSalidaElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
-
-    var legajo = legajoElement ? legajoElement.value.trim() : '';
-    var nombre = nombreElement ? nombreElement.value.trim() : '';
-    var horaInicio = horaInicioElement ? horaInicioElement.value : '';
-    var horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
-
-    if (!legajo && !nombre && !horaInicio && !horaSalida) {
-        continue; // Saltar a la siguiente iteración si todos los campos están vacíos
+    if (!responsable || !numTrabajo) {
+        alert('Por favor, ingrese el Responsable y/o el Número de Trabajo.');
+        return;
     }
 
-    var detalle = `${tipo} ${i + 1}:`;
-    if (legajo) {
-        detalle += ` Legajo ${legajo},`;
-    }
-    if (nombre) {
-        detalle += ` Nombre ${nombre}`;
-    }
-    if (horaInicio) {
-        detalle += `, Hora de Inicio ${horaInicio}`;
-    }
-    if (horaSalida) {
-        detalle += `, Hora de Salida ${horaSalida}`;
-    }
-    agregarDetalle(detalle);
-}
-}
+    const secciones = Array.from(document.querySelectorAll('input[name="secciones"]:checked')).map(seccion => seccion.value);
 
-function agregarDetallesRelevo(tipo, cantidad, contenedorId) {
-for (var i = 0; i < cantidad; i++) {
-    var legajoElement = document.querySelector(`.${contenedorClass} input.relevo_${tipo.toLowerCase()}_legajo[data-index="${i}"]`);
-    var nombreElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
-    var horaInicioElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
-    var horaSalidaElement = document.querySelector(`#${contenedorId} input[name="relevo_${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
-
-    var legajo = legajoElement ? legajoElement.value.trim() : '';
-    var nombre = nombreElement ? nombreElement.value.trim() : '';
-    var horaInicio = horaInicioElement ? horaInicioElement.value : '';
-    var horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
-
-    if (!legajo && !nombre && !horaInicio && !horaSalida) {
-        continue; // Saltar a la siguiente iteración si todos los campos están vacíos
+    // Función para agregar detalles al PDF si el campo no está vacío
+    const agregarDetalle = (texto) => {
+        if (texto) {
+            documento.text(20, yPosition, texto);
+            yPosition += 10;
+        }
     }
 
-    var detalle = `Relevo de ${tipo} ${i + 1}:`;
-    if (legajo) {
-        detalle += ` Legajo ${legajo},`;
+    agregarDetalle(`Operador de Personal: ${responsable}`);
+    agregarDetalle(`Número de Trabajo: ${numTrabajo}`);
+    agregarDetalle(`Secciones a ocupar : ${secciones.join(', ')}`);
+
+    const numConductores = document.getElementById('conductor').value;
+    const numGuardas = document.getElementById('guarda').value;
+    const numPilotos = document.getElementById('piloto').value;
+
+    const agregarDetallesPersonal = (tipo, cantidad, contenedorId, contenedorRelevoId) => {
+        for (let i = 0; i < cantidad; i++) {
+            const legajoElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_legajo[]"][data-index="${i}"]`);
+            const nombreElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
+            const horaInicioElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
+            const horaSalidaElement = document.querySelector(`#${contenedorId} input[name="${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
+
+            const legajo = legajoElement ? legajoElement.value.trim() : '';
+            const nombre = nombreElement ? nombreElement.value.trim() : '';
+            const horaInicio = horaInicioElement ? horaInicioElement.value : '';
+            const horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
+
+            if (!legajo && !nombre && !horaInicio && !horaSalida) continue; // Saltar a la siguiente iteración si todos los campos están vacíos
+
+            let detalle = `${tipo} ${i + 1}:`;
+            if (legajo) detalle += ` Legajo ${legajo},`;
+            if (nombre) detalle += ` Nombre ${nombre}`;
+            if (horaInicio) detalle += `, Hora de Inicio ${horaInicio}`;
+            if (horaSalida) detalle += `, Hora de Salida ${horaSalida}`;
+            agregarDetalle(detalle);
+        }
     }
-    if (nombre) {
-        detalle += ` Nombre ${nombre}`;
+
+    const agregarDetallesRelevo = (tipo, cantidad, contenedorId, contenedorRelevoId) => {
+        for (let i = 0; i < cantidad; i++) {
+            const legajoElement = document.querySelector(`#${contenedorRelevoId} input[name="relevo_${tipo.toLowerCase()}_legajo[]"][data-index="${i}"]`);
+            const nombreElement = document.querySelector(`#${contenedorRelevoId} input[name="relevo_${tipo.toLowerCase()}_nombre[]"][data-index="${i}"]`);
+            const horaInicioElement = document.querySelector(`#${contenedorRelevoId} input[name="relevo_${tipo.toLowerCase()}_hora_inicio[]"][data-index="${i}"]`);
+            const horaSalidaElement = document.querySelector(`#${contenedorRelevoId} input[name="relevo_${tipo.toLowerCase()}_hora_salida[]"][data-index="${i}"]`);
+
+            const legajo = legajoElement ? legajoElement.value.trim() : '';
+            const nombre = nombreElement ? nombreElement.value.trim() : '';
+            const horaInicio = horaInicioElement ? horaInicioElement.value : '';
+            const horaSalida = horaSalidaElement ? horaSalidaElement.value : '';
+
+            if (!legajo && !nombre && !horaInicio && !horaSalida) continue; // Saltar a la siguiente iteración si todos los campos están vacíos
+
+            let detalle = `Relevo de ${tipo} ${i + 1}:`;
+            if (legajo) detalle += ` Legajo ${legajo},`;
+            if (nombre) detalle += ` Nombre ${nombre}`;
+            if (horaInicio) detalle += `, Hora de Inicio ${horaInicio}`;
+            if (horaSalida) detalle += `, Hora de Salida ${horaSalida}`;
+            agregarDetalle(detalle);
+        }
     }
-    if (horaInicio) {
-        detalle += `, Hora de Inicio ${horaInicio}`;
+
+    agregarDetallesPersonal('Conductor', numConductores, 'conductorCampos', 'relevoConductorCampos');
+    agregarDetallesRelevo('Conductor', numConductores, 'conductorCampos', 'relevoConductorCampos');
+    agregarDetallesPersonal('Guarda', numGuardas, 'guardaCampos', 'relevoGuardaCampos');
+    agregarDetallesRelevo('Guarda', numGuardas, 'guardaCampos', 'relevoGuardaCampos');
+    agregarDetallesPersonal('Piloto', numPilotos, 'pilotoCampos', 'relevoPilotoCampos');
+    agregarDetallesRelevo('Piloto', numPilotos, 'pilotoCampos', 'relevoPilotoCampos');
+
+    // Agregar sección de observaciones
+    const observaciones = document.getElementById('observaciones').value.trim();
+    if (observaciones) {
+        agregarDetalle('Observaciones: ' + observaciones);
     }
-    if (horaSalida) {
-        detalle += `, Hora de Salida ${horaSalida}`;
-    }
-    agregarDetalle(detalle);
-}
-}
 
-var numConductores = document.getElementById('conductor').value;
-var numConductores = document.getElementsByClassName('conductor').value;
+    // Cambiar el estilo para el pie de página
+    documento.setFontStyle("italic");
 
-var numGuardas = document.getElementById('guarda').value;
-var numPilotos = document.getElementById('piloto').value;
+    // Agregar Pie de Página
+    documento.text(20, documento.internal.pageSize.height - 20, "Generado de la Mesa de Personal.");
 
-agregarDetallesPersonal('Conductor', numConductores, 'conductorCampos', 'relevoConductorCampos');
-agregarDetallesRelevo('Conductor', numConductores, 'relevoConductorCampos');
-agregarDetallesPersonal('Guarda', numGuardas, 'guardaCampos', 'relevoGuardaCampos');
-agregarDetallesRelevo('Guarda', numGuardas, 'relevoGuardaCampos');
-agregarDetallesPersonal('Piloto', numPilotos, 'pilotoCampos', 'relevoPilotoCampos');
-agregarDetallesRelevo('Piloto', numPilotos, 'relevoPilotoCampos');
-
-// Agregar sección de observaciones
-var observaciones = document.getElementById('observaciones').value.trim();
-if (observaciones) {
-agregarDetalle('Observaciones: ' + observaciones);
-}
-// Cambiar el estilo para el pie de página
-documento.setFontStyle("italic");
-
-// Agregar Pie de Página
-documento.text(20, documento.internal.pageSize.height - 20, "Generado de la Mesa de Personal.");
-
-documento.save('formulario.pdf');
+    documento.save('formulario.pdf');
 }
 
 function limpiarCampos() {
